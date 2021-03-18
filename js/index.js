@@ -1,12 +1,13 @@
 data = [[1,2,3,4,5],[6,7,8,9,10]]
 
 const updateDataInHTML = ()=> {
-          document.querySelector('data-table').setAttribute('data',JSON.stringify(data))
+    document.querySelector('data-table').setAttribute('data',JSON.stringify(data))
 }
 
 updateDataInHTML()
 
-const addClick = (index) =>{
+const addProduct = (index)=>{
+    console.log(`index ${index}`)
     Swal.fire({
         title: '<strong>Agregar Producto</strong>',
         icon: 'info',
@@ -35,17 +36,27 @@ const addClick = (index) =>{
         cancelButtonText:
             '<i class="fa fa-thumbs-down"></i> Cancelar',
         cancelButtonAriaLabel: 'Thumbs down'
-        }).then(result=>{
+        })
+        .then(result=>{
+            console.log(`dismissed`)
             if(result.dismiss!='cancel'){
                 const code = document.querySelector('#in_code').value
                 const name = document.querySelector('#in_name').value
                 const amount = Number(document.querySelector('#in_amount').value)
                 const price = Number(document.querySelector('#in_price').value)
-                data.splice(index+1,0,[code,name,amount,price,amount*price])
+                data.splice(index,0,[code,name,amount,price,amount*price])
                 updateDataInHTML()
             }
         })
-    }
+}
+
+const addClick = (index) =>{
+    addProduct(index+1)
+}
+
+const addClickGlobal = () =>{
+    addProduct(data.length)
+}
     
 const removeClick = (index)=>{
     Swal.fire({
@@ -69,7 +80,11 @@ const removeClick = (index)=>{
         }
     })
 }
-
-const globalAdd = () => {
-    
-}
+addEventListener('DOMContentLoaded',()=>{
+    //console.log(`data.length: ${data.length}`)
+    document.querySelector('#btn_addGlobal').addEventListener('click',addClickGlobal)
+    document.querySelector('#btn_createNote').addEventListener('click',()=>{
+        console.log('click checkout-ticket')
+        document.querySelector('checkout-ticket').setAttribute('data',JSON.stringify(data))
+    })
+})
