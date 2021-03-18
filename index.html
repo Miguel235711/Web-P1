@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/components/data-table.js" defer></script>
+    <script src="js/components/checkout-ticket.js" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <title>Proyecto P1</title>
 </head>
@@ -12,12 +13,11 @@
     <h1>Pop-up info widget - web components</h1>
 
     <form>
-      <div>
-        <data-table headers='["Código","Nombre","Cantidad","Precio","Total"]' add-click="addClick" remove-click="removeClick"></data-table> <!--Use json like notation for attributes-->
-        <button>Crear nota</button>
-      </div>
+        <data-table headers='["Código","Nombre","Cantidad","Precio","Total"]' add-click="addClick" remove-click="removeClick"></data-table>
+        <button type="button" id="btn_addGlobal">+</button>
+        <button type="button" id="btn_createNote">Crear nota</button>
     </form>  
-
+    <checkout-ticket data='[["1","2","3","4","5"],["6","7","8","9","10"]]'></checkout-ticket>
     <script src="js/index.js"></script>
 </body>
 </html>
