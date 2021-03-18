@@ -11,8 +11,6 @@ class CheckoutTicket extends HTMLElement {
       const wrapper = document.createElement('span')
 
       shadow.appendChild(wrapper)
-
-      
   
       /*const headers = JSON.parse(this.getAttribute('headers'))
   
