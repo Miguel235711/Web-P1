@@ -1,22 +1,21 @@
 // Create a class for the element
 class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,total],[code,name,amount,price,total]] |
   shadow = undefined
+
   static get observedAttributes() {
     return ['data'];
   }
   //headers 
-    build(){
+    static build() {
       console.log('checkout-ticket build')
       // Create spans
       const wrapper = document.createElement('span')
-
       this.shadow.appendChild(wrapper)
       
       const data = JSON.parse(this.getAttribute('data'))
 
       const companyName = document.createElement('h4')
       companyName.className = 'center'
-
       companyName.textContent = 'Cadena Comercial Oxxo S.A. de C.V.'
 
       const code = document.createElement('h4')
@@ -36,18 +35,30 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
         acum += Number(data[i][4])
 
       const total = document.createElement('h4')
-      total.style='text-align: right;'
-      total.textContent=`$${acum}`
-      
-      
+      total.style='text-align: right; margin: 0px;'
+      total.textContent=`Total: $${acum}`
+
+      const taxes = document.createElement('h4')
+      taxes.style='text-align: right; margin: 0px;'
+      taxes.textContent=`IVA INCLUIDO: $${acum*0.16}`
+
+      const footer = document.createElement('p')
+      footer.style='text-align: center;'
+      footer.innerHTML = "MUCHAS GRACIAS POR SU COMPRA <br> PAGO EN UNA SOLA EXHIBICION <br> LUGAR DE EXPEDICION <br> FELIPE CARRILLO PUERTO <br> QUINTANA ROO <br> MANZANA 25 ZONA 1 #LOTE 1"
+
+      const contact = document.createElement('p')
+      contact.style='text-align: center;'
+      contact.innerHTML = "email: atencionaclientes@oxxo.com Tel. Myt. 83 20 20 20 <br> Teléfono sin costo 01 (81) 83 20 20 20"
+
       wrapper.appendChild(companyName)
       wrapper.appendChild(code)
       wrapper.appendChild(store)
       wrapper.appendChild(address)
+
       for(let i = 0 ; i < 2 ; i ++){
         const separator = document.createElement('p')
         separator.style=`
-          border-top: 3px dashed #bbb;
+          border-top: 3px dashed black;
         `
         wrapper.appendChild(separator)
       }
@@ -60,14 +71,15 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
     const table = document.createElement('table')
     wrapper.appendChild(table)
     wrapper.appendChild(total)
+    wrapper.appendChild(taxes)
+    wrapper.appendChild(footer)    
+    wrapper.appendChild(contact)
     table.className='center'
 
     //rows
-
     const tbody = document.createElement('tbody')
 
     table.appendChild(tbody)
-
 
     data.forEach(row=>{
       const tr = document.createElement('tr')
@@ -79,10 +91,7 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
       tbody.appendChild(tr)
     })
 
-
     //style
-
-
       const style = document.createElement('style');
 
       style.textContent = `
@@ -95,12 +104,12 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
       
       wrapper.appendChild(style)
     }
+
     constructor() {
       // Always call super first in constructor
       super()
       this.shadow = this.attachShadow({mode: 'open'})
       this.build()
-
     }
     get data(){
       return this.getAttribute('data')
@@ -112,6 +121,6 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
       this.build()
     }
   }
-  
+
   // Define the new element
   customElements.define('checkout-ticket', CheckoutTicket);
