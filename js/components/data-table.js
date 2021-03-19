@@ -8,15 +8,11 @@ class DataTable extends HTMLElement {
     // Create a shadow root
     // Create spans
     const wrapper = document.createElement('span')
-
     const headers = JSON.parse(this.getAttribute('headers'))
-
     const data = JSON.parse(this.getAttribute('data'))
-
     const addClickF = this.getAttribute('add-click')
-
     const removeClickF = this.getAttribute('remove-click')
-       
+  
     //console.log(data)
 
     //wrapper.setAttribute('class', 'wrapper')
@@ -90,23 +86,15 @@ class DataTable extends HTMLElement {
     `
 
     this.shadow.appendChild(wrapper)
-
     const table = document.createElement('table')
-
     wrapper.appendChild(style)
-
     console.log(style.isConnected)
-
     wrapper.appendChild(table)
 
     ///headers
-
     const thead  = document.createElement('thead')
-
     table.appendChild(thead)
-
     const tr = document.createElement('tr')
-
     thead.appendChild(tr)
 
     headers.forEach(content=>{
@@ -118,41 +106,39 @@ class DataTable extends HTMLElement {
     for(let i = 0; i < 2 ; i ++)
       tr.appendChild(document.createElement('th'))
 
-    //rows
+      //rows
+      const tbody = document.createElement('tbody')
+      table.appendChild(tbody)
 
-    const tbody = document.createElement('tbody')
-
-    table.appendChild(tbody)
-
-
-    data.forEach((row,index)=>{
-      const tr = document.createElement('tr')
-      row.forEach(content=>{
-        const td = document.createElement('td')
-        td.textContent=content
-        tr.appendChild(td)
+      data.forEach((row,index)=>{
+        const tr = document.createElement('tr')
+        row.forEach(content=>{
+          const td = document.createElement('td')
+          td.textContent=content
+          tr.appendChild(td)
       })
-      let addButton = document.createElement('button')
       
+      let addButton = document.createElement('button')
+        
       addButton.textContent='+'
       addButton.addEventListener('click',()=>{
         eval(`${addClickF}(${index})`)
       })
-      tr.appendChild(addButton)
-      let removeButton = document.createElement('button')
-      removeButton.addEventListener('click',()=>{
-        eval(`${removeClickF}(${index})`)
+        tr.appendChild(addButton)
+        let removeButton = document.createElement('button')
+        removeButton.addEventListener('click',()=>{
+          eval(`${removeClickF}(${index})`)
+        })
+        removeButton.textContent='-'
+        tr.appendChild(removeButton)
+        tbody.appendChild(tr)
       })
-      removeButton.textContent='-'
-      tr.appendChild(removeButton)
-      tbody.appendChild(tr)
-    })
 
-    //console.log('end of constructor')
-    //console.log(`table: ${table}`)
-    /*wrapper.appendChild(icon);
-    wrapper.appendChild(info);*/
-  }
+      //console.log('end of constructor')
+      //console.log(`table: ${table}`)
+      /*wrapper.appendChild(icon);
+      wrapper.appendChild(info);*/
+    }
   constructor() {
     // Always call super first in constructor
     super()
