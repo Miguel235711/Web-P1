@@ -84,19 +84,17 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
 
     //rows
     const tbody = document.createElement('tbody')
-
-    table.appendChild(tbody)
     if(data)
       data.forEach(row=>{
         const tr = document.createElement('tr')
-        row.forEach(content=>{
+        row.forEach((content,index)=>{
           const td = document.createElement('td')
-          td.textContent=content
+          td.textContent=(index==3||index==4 ? '$':'')+content
           tr.appendChild(td)
         })
         tbody.appendChild(tr)
       })
-
+    table.appendChild(tbody)
     //style
       const style = document.createElement('style');
 
@@ -105,6 +103,9 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
           text-align:center;
           margin-left: auto;
           margin-right: auto;
+        }
+        table{
+          border-spacing: 5em 0;
         }
       `;
       
