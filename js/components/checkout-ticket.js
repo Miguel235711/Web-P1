@@ -55,7 +55,10 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
         `
         wrapper.appendChild(separator)
       }
-
+      const date = document.createElement('p')
+      date.style = 'text-align: right;'
+      date.textContent = (new Date()).toLocaleString()
+      wrapper.appendChild(date)
     ///table
     ///headers
 
