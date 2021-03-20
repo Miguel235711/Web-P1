@@ -125,7 +125,7 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
       return this.getAttribute('data')
     }
     attributeChangedCallback(attrName, oldVal, newVal) {
-      console.log('changed checkouot-ticket')
+      console.log('changed chesckouot-ticket')
       while(this.shadow.lastElementChild)
         this.shadow.removeChild(this.shadow.lastElementChild)
       this.build()

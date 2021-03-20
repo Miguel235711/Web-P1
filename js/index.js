@@ -1,4 +1,4 @@
-data = [/*[1,2,3,4,5],[6,7,8,9,10]*/]
+data = [[1,2,3,4,5],[6,7,8,9,10]]
 
 const updateDataInHTML = ()=> {
     document.querySelector('data-table').setAttribute('data',JSON.stringify(data))
@@ -8,32 +8,34 @@ updateDataInHTML()
 
 const addProduct = (index)=>{
     console.log(`index ${index}`)
+    const title = document.createElement('strong')
+    title.textContent = 'Agregar Producto'
+    const form = document.createElement('form');
+    [
+        {title:'Código',type:'text',id:'in_code'},
+        {title:'Nombre',type:'text',id:'in_name'},
+        {title:'Cantidad',type:'number',id:'in_amount'},
+        {title:'Precio',type:'number',id:'in_price'}
+    ].forEach(divConf=>{
+        const div = document.createElement('div')
+        const titleText = document.createTextNode(`${divConf.title}: `)
+        const input = document.createElement('input')
+        input.setAttribute('type',divConf.type)
+        input.setAttribute('id',divConf.id)
+        div.appendChild(titleText)
+        div.appendChild(input)
+        form.appendChild(div)
+    })
     Swal.fire({
-        title: '<strong>Agregar Producto</strong>',
+        title: title,
         icon: 'info',
-        html:
-            `<form>
-            <div>
-                Código: <input type='text' id='in_code'/>
-            </div>
-            <div>
-                Nombre: <input type='text' id='in_name'/>
-            </div>
-            <div>
-                Cantidad: <input type='number' id='in_amount'/>
-            </div>
-            <div>
-                Precio: <input type='number' id='in_price'/>
-            </div>
-            </form>`,
+        html: form,
         showCancelButton: true,
         focusConfirm: false,
         allowOutsideClick:false,
-        confirmButtonText:
-            '<i class="fa fa-thumbs-up"></i> ¡Agregar!',
+        confirmButtonText: '¡Agregar!',
         confirmButtonAriaLabel: 'Thumbs up, great!',
-        cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i> Cancelar',
+        cancelButtonText: 'Cancelar',
         cancelButtonAriaLabel: 'Thumbs down'
         })
         .then(
@@ -68,19 +70,19 @@ const addClickGlobal = () =>{
 }
     
 const removeClick = (index)=>{
+    const title = document.createElement('strong')
+    title.textContent = 'Borrar producto'
     Swal.fire({
-        title: '<strong>Borra producto</strong>',
+        title: title,
         icon: 'error',
         text: '¿Está seguro de borrar el producto?',
         showCloseButton: true,
         showCancelButton: true,
         allowOutsideClick:false,
         focusConfirm: false,
-        confirmButtonText:
-            '<i class="fa fa-thumbs-up"></i> Borrar',
+        confirmButtonText: 'Borrar',
         confirmButtonAriaLabel: 'Thumbs up, great!',
-        cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i> Cancelar',
+        cancelButtonText: 'Cancelar',
         cancelButtonAriaLabel: 'Thumbs down'
     }).then(result=> {
         if(result.dismiss!='cancel'){
