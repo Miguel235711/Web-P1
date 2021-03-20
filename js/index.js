@@ -37,9 +37,10 @@ const addProduct = (index)=>{
             '<i class="fa fa-thumbs-down"></i> Cancelar',
         cancelButtonAriaLabel: 'Thumbs down'
         })
-        .then(result=>{
+        .then(
+            result=>{
             console.log(`dismissed`)
-            if(result.dismiss!='cancel'){
+            if(result.dismiss!='cancel') {
                 const code = document.querySelector('#in_code').value
                 const name = document.querySelector('#in_name').value
                 const amount = Number(document.querySelector('#in_amount').value)
