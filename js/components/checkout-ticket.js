@@ -6,7 +6,7 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
     return ['data'];
   }
   //headers 
-    static build() {
+      build() {
       console.log('checkout-ticket build')
       // Create spans
       const wrapper = document.createElement('span')
@@ -42,14 +42,6 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
       taxes.style='text-align: right; margin: 0px;'
       taxes.textContent=`IVA INCLUIDO: $${acum*0.16}`
 
-      const footer = document.createElement('p')
-      footer.style='text-align: center;'
-      footer.innerHTML = "MUCHAS GRACIAS POR SU COMPRA <br> PAGO EN UNA SOLA EXHIBICION <br> LUGAR DE EXPEDICION <br> FELIPE CARRILLO PUERTO <br> QUINTANA ROO <br> MANZANA 25 ZONA 1 #LOTE 1"
-
-      const contact = document.createElement('p')
-      contact.style='text-align: center;'
-      contact.innerHTML = "email: atencionaclientes@oxxo.com Tel. Myt. 83 20 20 20 <br> Teléfono sin costo 01 (81) 83 20 20 20"
-
       wrapper.appendChild(companyName)
       wrapper.appendChild(code)
       wrapper.appendChild(store)
@@ -68,12 +60,25 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
 
     //const thead  = document.createElement('thead')
 
+    const footer = ["MUCHAS GRACIAS POR SU COMPRA", "PAGO EN UNA SOLA EXHIBICION", "LUGAR DE EXPEDICION", "FELIPE CARRILLO PUERTO", "QUINTANA ROO", "MANZANA 25 ZONA 1 #LOTE 1"]
+    const contact = ["email: atencionaclientes@oxxo.com Tel. Myt. 83 20 20 20", "Teléfono sin costo 01 (81) 83 20 20 20"]
+
     const table = document.createElement('table')
     wrapper.appendChild(table)
     wrapper.appendChild(total)
     wrapper.appendChild(taxes)
-    wrapper.appendChild(footer)    
-    wrapper.appendChild(contact)
+    footer.forEach( row => {
+      const textNode = document.createElement("p")
+      textNode.textContent = row
+      textNode.className = 'center'
+      wrapper.appendChild(textNode)
+    })
+    contact.forEach( row => {
+      const textNode = document.createElement("p")
+      textNode.textContent = row
+      textNode.className = 'center'
+      wrapper.append(textNode)
+    })
     table.className='center'
 
     //rows
