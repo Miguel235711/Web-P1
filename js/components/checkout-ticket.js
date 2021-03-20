@@ -32,12 +32,13 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
       address.textContent = 'Edison Nte. Número 1235 Colonia talleres Monterrey, Nuevo León C.P. 64480 Regimen de Opcional para Grupos de Sociedades'
       
       let acum = 0
-      for(let i = 0 ; i < data.length; i ++)
-        acum += Number(data[i][4])
+      if(data)
+        for(let i = 0 ; i < data.length; i ++)
+          acum += Number(data[i][4])
 
       const total = document.createElement('h4')
       total.style='text-align: right;'
-      total.textContent=`$${acum}`
+      total.textContent=`Total: $${acum}`
       
       
       wrapper.appendChild(companyName)
@@ -68,16 +69,16 @@ class CheckoutTicket extends HTMLElement { /// data = [[code,name,amount,price,t
 
     table.appendChild(tbody)
 
-
-    data.forEach(row=>{
-      const tr = document.createElement('tr')
-      row.forEach(content=>{
-        const td = document.createElement('td')
-        td.textContent=content
-        tr.appendChild(td)
+    if(data)
+      data.forEach(row=>{
+        const tr = document.createElement('tr')
+        row.forEach(content=>{
+          const td = document.createElement('td')
+          td.textContent=content
+          tr.appendChild(td)
+        })
+        tbody.appendChild(tr)
       })
-      tbody.appendChild(tr)
-    })
 
 
     //style

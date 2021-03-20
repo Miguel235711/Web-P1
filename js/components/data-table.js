@@ -127,9 +127,9 @@ class DataTable extends HTMLElement {
 
     data.forEach((row,index)=>{
       const tr = document.createElement('tr')
-      row.forEach(content=>{
+      row.forEach((content,index)=>{
         const td = document.createElement('td')
-        td.textContent=content
+        td.textContent=(index==3||index==4?'$':'')+content
         tr.appendChild(td)
       })
       let addButton = document.createElement('button')
