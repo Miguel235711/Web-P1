@@ -26,7 +26,6 @@ const addProduct = (index)=>{
                 Precio: <input type='number' id='in_price'/>
             </div>
             </form>`,
-        showCloseButton: true,
         showCancelButton: true,
         focusConfirm: false,
         allowOutsideClick:false,
@@ -93,6 +92,8 @@ addEventListener('DOMContentLoaded',()=>{
     document.querySelector('#btn_addGlobal').addEventListener('click',addClickGlobal)
     document.querySelector('#btn_createNote').addEventListener('click',()=>{
         console.log('click checkout-ticket')
-        document.querySelector('checkout-ticket').setAttribute('data',JSON.stringify(data))
+        const checkoutTicketElement = document.querySelector('checkout-ticket')
+        checkoutTicketElement.removeAttribute('hidden')
+        checkoutTicketElement.setAttribute('data',JSON.stringify(data))
     })
 })
