@@ -45,6 +45,13 @@ const addProduct = (index)=>{
                 const name = document.querySelector('#in_name').value
                 const amount = Number(document.querySelector('#in_amount').value)
                 const price = Number(document.querySelector('#in_price').value)
+                const emptyChars= /^\s*$/
+
+                if(emptyChars.test(code)|| emptyChars.test(name) || price=='' || isNaN(price) ||!( (/^[1-9][0-9]*$/).test(amount) || amount=='0')){
+                    console.log("No valid")
+                    alert("Por favor llene correctamente todos los campos ")
+                    return 
+                }
                 data.splice(index,0,[code,name,amount,price,amount*price])
                 updateDataInHTML()
             }
