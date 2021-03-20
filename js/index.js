@@ -1,4 +1,4 @@
-data = [[1,2,3,4,5],[6,7,8,9,10]]
+data = [/*[1,2,3,4,5],[6,7,8,9,10]*/]
 
 const updateDataInHTML = ()=> {
     document.querySelector('data-table').setAttribute('data',JSON.stringify(data))
@@ -42,15 +42,17 @@ const addProduct = (index)=>{
             if(result.dismiss!='cancel') {
                 const code = document.querySelector('#in_code').value
                 const name = document.querySelector('#in_name').value
-                const amount = Number(document.querySelector('#in_amount').value)
-                const price = Number(document.querySelector('#in_price').value)
+                let amount =document.querySelector('#in_amount').value
+                let price = document.querySelector('#in_price').value
                 const emptyChars= /^\s*$/
 
-                if(emptyChars.test(code)|| emptyChars.test(name) || price=='' || isNaN(price) ||!( (/^[1-9][0-9]*$/).test(amount) || amount=='0')){
+                if(emptyChars.test(code)|| emptyChars.test(name) || price=='' || isNaN(price) ||!( (/^[1-9][0-9]*$/).test(amount))){
                     console.log("No valid")
                     alert("Por favor llene correctamente todos los campos ")
                     return 
                 }
+                amount = Number(amount)
+                price = Number(price)
                 data.splice(index,0,[code,name,amount,price,amount*price])
                 updateDataInHTML()
             }
