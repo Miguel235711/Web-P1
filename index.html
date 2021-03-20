@@ -7,17 +7,22 @@
     <script src="js/components/data-table.js" defer></script>
     <script src="js/components/checkout-ticket.js" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  
     <title>Proyecto P1</title>
 </head>
 <body>
-    <h1>Cadena comercial OXXO - Xochitec</h1>
-
+    <h1 style="text-align:center;">Cadena comercial OXXO - Xochitec</h1>
     <form>
         <data-table headers='["Código","Nombre","Cantidad","Precio","Total"]' add-click="addClick" remove-click="removeClick"></data-table>
-        <button type="button" id="btn_addGlobal">+</button>
-        <button type="button" id="btn_createNote">Crear nota</button>
-    </form>  
+        <div align="center" style="margin-top: 1em;">
+            <button type="button" id="btn_addGlobal" class="btn btn-primary">+</button>
+            <button type="button" id="btn_createNote" class="btn btn-primary">Crear nota</button>
+        </div>
+    </form>
+    <h1>Nota:</h1>  
     <checkout-ticket hidden></checkout-ticket>
     <script src="js/index.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

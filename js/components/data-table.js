@@ -16,10 +16,36 @@ class DataTable extends HTMLElement {
     const style = document.createElement('style');
 
     style.textContent = `
-      table{
+      table, td, th {
         border: 1px solid black;
-        border-collapse: collapse;
       }
+      table{
+        border-collapse: collapse;
+        width: 100%;
+      }
+      .btn {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 20px;
+        margin: 3px 3px;
+      }
+      .btn:hover{
+        cursor:pointer;
+      }
+      .btn-add:hover{
+        background-color: #2c8a4b;
+      }
+      .btn-remove:hover{
+        background-color: #d44336;
+      }
+      .btn-add {background-color: #4CAF50;}
+      .btn-remove {background-color: #f44336;} 
+      
     `
 
     this.shadow.appendChild(wrapper)
@@ -40,8 +66,8 @@ class DataTable extends HTMLElement {
       tr.appendChild(th)
     })
 
-    for(let i = 0; i < 2 ; i ++)
-      tr.appendChild(document.createElement('th'))
+    /*for(let i = 0; i < 2 ; i ++)
+      tr.appendChild(document.createElement('th'))*/
 
       //rows
       const tbody = document.createElement('tbody')
@@ -58,6 +84,8 @@ class DataTable extends HTMLElement {
       let addButton = document.createElement('button')
         
       addButton.textContent='+'
+      addButton.className='btn btn-add'
+      addButton.setAttribute('type','button')
       addButton.addEventListener('click',()=>{
         eval(`${addClickF}(${index})`)
       })
@@ -67,6 +95,8 @@ class DataTable extends HTMLElement {
           eval(`${removeClickF}(${index})`)
         })
         removeButton.textContent='-'
+        removeButton.className='btn btn-remove'
+        removeButton.setAttribute('type','button')
         tr.appendChild(removeButton)
         tbody.appendChild(tr)
       })
